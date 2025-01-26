@@ -1,0 +1,41 @@
+name: C++ CI Workflow
+
+on:
+ workflow_dispatch:
+    inputs:
+      Device:
+        description: Select the device on which test needs to be performed, A10001-ec for QEMU
+        required: true
+        default: "A11LWA"
+        type: choice
+        options:
+        - "A11LWA"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up the C++ build environment
+      - name: Set up C++ environment
+        run: echo "Using C++ environment"
+
+      # Step 3: Create a build directory and run CMake
+      - name: Build the project using CMake
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+
+      # Step 4: Run tests (if any, optional)
+      - name: Run tests (if any)
+        run: |
+          cd build
+          ls
+          # Example: Running a test executable if you have one
+          #./test_executable
