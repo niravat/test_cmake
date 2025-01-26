@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: [self-hosted]  # Use the latest Ubuntu runner
 
     steps:
       # Step 1: Checkout the code from the repository
@@ -27,15 +27,15 @@ jobs:
       # Step 3: Create a build directory and run CMake
       - name: Build the project using CMake
         run: |
-          mkdir build
-          cd build
+          mkdir hello_world/build
+          cd hello_world/build
           cmake ..
           make
 
       # Step 4: Run tests (if any, optional)
       - name: Run tests (if any)
         run: |
-          cd build
+          cd hello_world/build
           ls
           # Example: Running a test executable if you have one
           #./test_executable
